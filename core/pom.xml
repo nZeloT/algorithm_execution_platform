@@ -8,6 +8,7 @@
         <artifactId>platform</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>platform-testbed</artifactId>
+    <artifactId>platform-core</artifactId>
     <version>1.0-SNAPSHOT</version>
+
 </project>

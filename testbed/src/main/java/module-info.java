@@ -1,1 +1,1 @@
-module nzelot.ega.testbed {}
+module nzelot.execution.platform.testbed {}
