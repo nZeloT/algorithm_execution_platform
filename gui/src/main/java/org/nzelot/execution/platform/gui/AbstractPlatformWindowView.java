@@ -17,10 +17,13 @@ import org.nzelot.execution.platform.gui.controls.flightrecorder.FlightRecorderT
 import org.nzelot.execution.platform.gui.controls.flightrecorder.FlightRecorderToolbarViewController;
 import org.nzelot.execution.platform.gui.rendering.RenderCanvas;
 import org.reflections.Reflections;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 
 public abstract class AbstractPlatformWindowView extends BorderPane {
@@ -91,6 +94,7 @@ public abstract class AbstractPlatformWindowView extends BorderPane {
     private void addClassesToMenu(Menu menu, Class<? extends Annotation> targetAnnotation){
         //noinspection SpellCheckingInspection
         Reflections ref = new Reflections("org.nzelot");
+        System.out.println("Scanning: " + Arrays.toString(ref.getConfiguration().getUrls().toArray()));
         var foundClasses = ref.getTypesAnnotatedWith(targetAnnotation);
 
         var menutItems = new ArrayList<MenuItem>();
