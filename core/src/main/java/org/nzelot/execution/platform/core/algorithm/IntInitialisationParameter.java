@@ -1,4 +1,4 @@
-package org.nzelot.execution.platform.gui.initialisation;
+package org.nzelot.execution.platform.core.algorithm;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

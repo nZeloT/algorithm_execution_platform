@@ -1,4 +1,4 @@
-package org.nzelot.execution.platform.gui.initialisation;
+package org.nzelot.execution.platform.core.algorithm;
 
 public @interface BooleanInitialisationParameter {
     String name();
