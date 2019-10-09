@@ -1,5 +1,7 @@
 package org.nzelot.execution.platform.gui.initialisation;
 
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -64,6 +66,10 @@ public class InitializationDialog extends Dialog<Pair<Boolean, Object[]>> {
                         dialogControl = handleBooleanInitialisationParameter((BooleanInitialisationParameter)annotation);
                         break;
                     }
+                    if(annotationType.equals(EnumInitialisationParameter.class)){
+                        dialogControl = handleEnumInitialisationParameter((EnumInitialisationParameter)annotation);
+                        break;
+                    }
                 }
 
                 if (dialogControl != null) {
@@ -115,5 +121,12 @@ public class InitializationDialog extends Dialog<Pair<Boolean, Object[]>> {
         var checkBox = new CheckBox();
         checkBox.setSelected(parameter.defaultValue());
         return new Triple<>(parameter.name(), checkBox, checkBox::isSelected);
+    }
+
+    private Triple<String, Node, Callable> handleEnumInitialisationParameter(EnumInitialisationParameter parameter) {
+        var combobox = new ComboBox<>();
+        combobox.getItems().addAll(parameter.valueDomain().getEnumConstants());
+        combobox.getSelectionModel().select(0);
+        return new Triple<>(parameter.name(), combobox, combobox.getSelectionModel()::getSelectedItem);
     }
 }
