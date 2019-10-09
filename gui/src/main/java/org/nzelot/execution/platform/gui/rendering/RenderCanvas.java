@@ -38,6 +38,11 @@ public class RenderCanvas extends Canvas {
         renderer.reset();
     }
 
+    public void setOffset(double offsetX, double offsetY) {
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+    }
+
     private void handleMouseDragged(MouseEvent evt) {
         var dragTransformX = evt.getX() - dragStartX;
         var dragTransformY = evt.getY() - dragStartY;
@@ -77,11 +82,12 @@ public class RenderCanvas extends Canvas {
 
     @Override
     public double prefWidth(double height) {
-        return getWidth();
+        return 150;
     }
 
     @Override
     public double prefHeight(double width) {
-        return getHeight();
+        return 150;
     }
+
 }

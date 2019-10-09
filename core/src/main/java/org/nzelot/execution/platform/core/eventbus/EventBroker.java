@@ -21,7 +21,7 @@ public class EventBroker {
                 var eventClass = ann.value();
                 if(method.getParameterCount() == 1 //check that there is only one parameter
                 && method.getParameterTypes()[0].equals(eventClass)){ //and the parameter type needs to match the annotation specified type
-//                    System.out.println("Event broker: Added " + sink + " as Sink for " + eventClass.getCanonicalName());
+                    System.out.println("Event broker: Added " + sink + " as Sink for " + eventClass.getCanonicalName());
 
                     if (instanceEventSinks.containsKey(eventClass)) { //do we know the event type?
                         instanceEventSinks.get(eventClass).add(new Pair<>(method, sink));
