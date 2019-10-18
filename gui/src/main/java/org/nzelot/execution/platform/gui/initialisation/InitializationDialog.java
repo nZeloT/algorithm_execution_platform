@@ -42,6 +42,11 @@ public class InitializationDialog extends Dialog<Pair<Boolean, Object[]>> {
 
         //1. find the right constructor
         var constructor = ReflectionUtil.getConstructorWithAnnotation(targetClass, Initializer.class);
+
+        //1b. check whether a recording checkbox needs to be present
+        var initAnnotation = constructor.getAnnotation(Initializer.class);
+        var isRecordable = initAnnotation != null && initAnnotation.isRecordable();
+
         Parameter[] parameters = constructor != null ? constructor.getParameters() : null;
 
         //2. if we found annotated parameters build the dialog accordingly
@@ -83,9 +88,12 @@ public class InitializationDialog extends Dialog<Pair<Boolean, Object[]>> {
             throw new IllegalArgumentException("No constructor annotated with " + Initializer.class.getCanonicalName() + " found for class " + targetClass.getCanonicalName());
 
         //add a visualisation wanted checkbox
-        dialogGrid.add(new Label("Record Steps"), 0, rowId);
-        dialogGrid.add(recordEvents = new CheckBox(), 1, rowId);
-        recordEvents.setSelected(true);
+        if(isRecordable) {
+            dialogGrid.add(new Label("Record Steps"), 0, rowId);
+            dialogGrid.add(recordEvents = new CheckBox(), 1, rowId);
+            recordEvents.setSelected(true);
+        }
+
         getDialogPane().setContent(dialogGrid);
 
         //3. set the result converter
@@ -97,7 +105,7 @@ public class InitializationDialog extends Dialog<Pair<Boolean, Object[]>> {
                     for (int i = 0; i < valueProvider.size(); i++) {
                         result[i] = valueProvider.get(i).call();
                     }
-                    return new Pair<>(recordEvents.isSelected(), result);
+                    return new Pair<>(isRecordable && recordEvents.isSelected(), result);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return null;
