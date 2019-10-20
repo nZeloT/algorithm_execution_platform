@@ -13,19 +13,35 @@ public class SharedResource<M> {
         this.resource = resource;
     }
 
-    public synchronized M getResource() {
+    public M getResource() {
         return resource;
     }
 
-    public synchronized void setResource(M resource) {
+    public void setResource(M resource) {
         this.resource = resource;
     }
 
-    public synchronized void lock() {
+    public void lock() {
+        var frame = StackWalker.getInstance().walk(frames -> frames.skip(1).findFirst()).orElseThrow();
+        System.out.println("[SHR-" + this.hashCode()
+                + "] Lock Request by " + frame.getClassName() + "." + frame.getMethodName()
+                + " Line " + frame.getLineNumber()
+                + " on Thread " + Thread.currentThread().getName());
+
         lock.lock();
+
+        System.out.println("[SHR-" + this.hashCode()
+                + "] Lock Request Granted to " + frame.getClassName() + "." + frame.getMethodName()
+                + " Line " + frame.getLineNumber()
+                + " on Thread " + Thread.currentThread().getName());
     }
 
-    public synchronized void unlock() {
+    public void unlock() {
+        var frame = StackWalker.getInstance().walk(frames -> frames.skip(1).findFirst()).orElseThrow();
+        System.out.println("[SHR-" + this.hashCode()
+                + "] Unlocked by " + frame.getClassName() + "." + frame.getMethodName()
+                + " Line " + frame.getLineNumber()
+                + " on Thread " + Thread.currentThread().getName());
         lock.unlock();
     }
 }
