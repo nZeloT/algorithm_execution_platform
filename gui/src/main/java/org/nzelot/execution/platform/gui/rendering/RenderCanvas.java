@@ -43,6 +43,10 @@ public class RenderCanvas extends Canvas {
         this.offsetY = offsetY;
     }
 
+    public void setZoomLevel(double newZoomLevel) {
+        this.zoomLevel = newZoomLevel;
+    }
+
     private void handleMouseDragged(MouseEvent evt) {
         var dragTransformX = evt.getX() - dragStartX;
         var dragTransformY = evt.getY() - dragStartY;
