@@ -69,6 +69,7 @@ public class AlgorithmExecutionEngine {
             }
             var runner = new AlgorithmRunner(broker, con, start, initialisation);
             runnerThread = new Thread(runner);
+            runnerThread.setName("Algorithm Runner");
             runnerThread.start();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
