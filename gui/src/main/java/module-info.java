@@ -2,6 +2,7 @@ module nzelot.execution.platform.gui {
     exports org.nzelot.execution.platform.gui.initialisation;
     exports org.nzelot.execution.platform.gui.rendering;
     exports org.nzelot.execution.platform.gui.playback;
+    exports org.nzelot.execution.platform.gui.util;
     exports org.nzelot.execution.platform.gui;
 
     opens org.nzelot.execution.platform.gui.controls.flightrecorder to nzelot.execution.platform.core;

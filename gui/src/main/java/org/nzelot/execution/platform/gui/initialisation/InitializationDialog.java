@@ -1,7 +1,5 @@
 package org.nzelot.execution.platform.gui.initialisation;
 
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -33,8 +31,8 @@ public class InitializationDialog extends Dialog<Pair<Boolean, Object[]>> {
                     + Generator.class.getCanonicalName() + " or " + Algorithm.class.getCanonicalName());
 
 
-        String dialogHeader = "Set the algorithm parameters ...";
-        ButtonType dialogStartGenerator = new ButtonType("Start Generator", ButtonBar.ButtonData.OK_DONE);
+        String dialogHeader = "Set the " + dialogTitle + " parameters ...";
+        ButtonType dialogStartGenerator = new ButtonType("Start " + dialogTitle, ButtonBar.ButtonData.OK_DONE);
 
         setTitle(dialogTitle);
         setHeaderText(dialogHeader);
