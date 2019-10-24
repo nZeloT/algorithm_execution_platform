@@ -23,25 +23,25 @@ public class SharedResource<M> {
 
     public void lock() {
         var frame = StackWalker.getInstance().walk(frames -> frames.skip(1).findFirst()).orElseThrow();
-        System.out.println("[SHR-" + this.hashCode()
-                + "] Lock Request by " + frame.getClassName() + "." + frame.getMethodName()
-                + " Line " + frame.getLineNumber()
-                + " on Thread " + Thread.currentThread().getName());
+//        System.out.println("[SHR-" + this.hashCode()
+//                + "] Lock Request by " + frame.getClassName() + "." + frame.getMethodName()
+//                + " Line " + frame.getLineNumber()
+//                + " on Thread " + Thread.currentThread().getName());
 
         lock.lock();
 
-        System.out.println("[SHR-" + this.hashCode()
-                + "] Lock Request Granted to " + frame.getClassName() + "." + frame.getMethodName()
-                + " Line " + frame.getLineNumber()
-                + " on Thread " + Thread.currentThread().getName());
+//        System.out.println("[SHR-" + this.hashCode()
+//                + "] Lock Request Granted to " + frame.getClassName() + "." + frame.getMethodName()
+//                + " Line " + frame.getLineNumber()
+//                + " on Thread " + Thread.currentThread().getName());
     }
 
     public void unlock() {
         var frame = StackWalker.getInstance().walk(frames -> frames.skip(1).findFirst()).orElseThrow();
-        System.out.println("[SHR-" + this.hashCode()
-                + "] Unlocked by " + frame.getClassName() + "." + frame.getMethodName()
-                + " Line " + frame.getLineNumber()
-                + " on Thread " + Thread.currentThread().getName());
+//        System.out.println("[SHR-" + this.hashCode()
+//                + "] Unlocked by " + frame.getClassName() + "." + frame.getMethodName()
+//                + " Line " + frame.getLineNumber()
+//                + " on Thread " + Thread.currentThread().getName());
         lock.unlock();
     }
 }
