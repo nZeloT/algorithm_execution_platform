@@ -9,6 +9,7 @@ import org.nzelot.execution.platform.core.eventbus.EventSink;
 import org.nzelot.execution.platform.core.flightrecorder.FlightRecorderControlEvent;
 import org.nzelot.execution.platform.gui.initialisation.InitializationDialog;
 import org.nzelot.execution.platform.gui.result.ResultDialog;
+import org.nzelot.execution.platform.gui.util.DialogUtils;
 
 import java.util.Map;
 
@@ -39,8 +40,9 @@ public abstract class AbstractPlatformWindowController {
             throw new IllegalArgumentException(algorithmClass.getCanonicalName() + " is not annotated with "
                     + Generator.class.getCanonicalName() + " or " + Algorithm.class.getCanonicalName());
 
-        new InitializationDialog(algorithmClass)
-                .showAndWait()
+        var initDiag = new InitializationDialog(algorithmClass);
+        DialogUtils.positionCenteredOnWindow(view.getScene().getWindow(), initDiag);
+        initDiag.showAndWait()
                 .ifPresentOrElse(result -> {
                     //ok button on dialog was clicked
                     if(algorithmClass.isAnnotationPresent(Generator.class))
@@ -60,7 +62,9 @@ public abstract class AbstractPlatformWindowController {
     }
 
     private void showAlgorithmResultDialog(String algoName, Map<String, Object> results){
-        new ResultDialog(algoName, results).showAndWait();
+        var diag = new ResultDialog(algoName, results);
+        DialogUtils.positionCenteredOnWindow(view.getScene().getWindow(), diag);
+        diag.showAndWait();
     }
 
     @EventSink(AlgorithmRunnerEvent.class)
